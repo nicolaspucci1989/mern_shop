@@ -9,7 +9,7 @@ const ProductScreen = ({ match }) => {
   return (
     <>
       <Link className={'btn btn-light my-3'} to={'/'}>
-        Go Back
+        Volver
       </Link>
       <Row>
         <Col md={6}>
@@ -24,10 +24,10 @@ const ProductScreen = ({ match }) => {
               <Rating rating={product.rating} numReviews={product.numReviews}/>
             </ListGroupItem>
             <ListGroupItem>
-              Price: ${product.price}
+              Precio: ${product.price}
             </ListGroupItem>
             <ListGroupItem>
-              Description: {product.description}
+              Descripcion: {product.description}
             </ListGroupItem>
           </ListGroup>
         </Col>
@@ -35,7 +35,7 @@ const ProductScreen = ({ match }) => {
           <Card>
             <ListGroup variant={"flush"}>
               <ListGroupItem>
-                <Col>Price:</Col>
+                <Col>Precio:</Col>
                 <Col>
                   <strong>${product.price}</strong>
                 </Col>
@@ -50,7 +50,7 @@ const ProductScreen = ({ match }) => {
 
               <ListGroupItem>
                <Button className={'btn-block'} type={'button'} disabled={!product.countInStock}>
-                 Add to cart
+                 Agregar al carrito
                </Button>
               </ListGroupItem>
             </ListGroup>
