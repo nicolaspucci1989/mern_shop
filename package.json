@@ -1,0 +1,14 @@
+{
+  "name": "mern_shop",
+  "version": "1.0.0",
+  "description": "mern shop",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Nicolas <nicolaspucci1989@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
