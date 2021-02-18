@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import {
   Button,
@@ -10,7 +10,6 @@ import {
   Row,
 } from "react-bootstrap"
 import { Rating } from "../components/Rating"
-import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { listProductDetails } from "../actions/productActions"
 import Loader from "../components/Loader"
