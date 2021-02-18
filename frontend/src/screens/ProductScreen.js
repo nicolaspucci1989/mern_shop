@@ -1,9 +1,10 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import {
   Button,
   Card,
   Col,
+  FormControl,
   Image,
   ListGroup,
   ListGroupItem,
@@ -16,7 +17,9 @@ import Loader from "../components/Loader"
 import Message from "../components/Message"
 import { PRODUCT_DETAILS_DESTROY } from "../constants/productConstants"
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ history, match }) => {
+  const [qty, setQty] = useState(1)
+
   const dispatch = useDispatch()
 
   const productDetails = useSelector((state) => state.productDetails)
@@ -29,6 +32,10 @@ const ProductScreen = ({ match }) => {
       dispatch({ type: PRODUCT_DETAILS_DESTROY })
     }
   }, [dispatch, match])
+
+  const addToCart = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
+  }
 
   return (
     <>
@@ -74,8 +81,30 @@ const ProductScreen = ({ match }) => {
                   <Col>{product.countInStock ? "En stock" : "Sin stock"}</Col>
                 </ListGroupItem>
 
+                {product.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Cantidad:</Col>
+                      <Col>
+                        <FormControl
+                          as="select"
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        >
+                          {[...Array(product.countInStock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </FormControl>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+
                 <ListGroupItem>
                   <Button
+                    onClick={addToCart}
                     className={"btn-block"}
                     type={"button"}
                     disabled={!product.countInStock}
