@@ -7,10 +7,12 @@ export const listProducts = () => async (dispatch) => {
 
     const { data } = await axios.get('/api/products')
 
-    dispatch({
-      type: PRODUCT_LIST_SUCCESS,
-      payload: data
-    })
+    setTimeout(() => {
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data
+      })
+    }, 500)
   } catch (error) {
     dispatch({
       type: PRODUCT_LIST_FAIL,
