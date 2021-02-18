@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { listProductDetails } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
+import { PRODUCT_DETAILS_DESTROY } from "../constants/productConstants"
 
 const ProductScreen = ({ match }) => {
   const dispatch = useDispatch()
@@ -23,7 +24,11 @@ const ProductScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id))
-  }, [dispatch, match.params.id])
+
+    return () => {
+      dispatch({ type: PRODUCT_DETAILS_DESTROY })
+    }
+  }, [dispatch, match])
 
   return (
     <>

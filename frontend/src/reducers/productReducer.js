@@ -1,4 +1,5 @@
 import {
+  PRODUCT_DETAILS_DESTROY,
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
@@ -31,6 +32,8 @@ export const productDetailsReducer = (
       return { loading: false, product: action.payload }
     case PRODUCT_DETAILS_FAIL:
       return { loading: false, error: action.payload }
+    case PRODUCT_DETAILS_DESTROY:
+      return { product: { reviews: [] } }
     default:
       return state
   }
