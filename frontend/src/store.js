@@ -8,6 +8,7 @@ import {
 } from "./reducers/productReducer.js"
 import { cartReducer } from "./reducers/cartReducer.js"
 import {
+  userDetailsReducer,
   userLoginReducer,
   userRegisterReducer,
 } from "./reducers/userReducers.js"
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
