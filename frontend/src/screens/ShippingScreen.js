@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { saveShippingAddress } from "../actions/cartActions"
+import CheckoutSteps from "../components/CheckoutSteps"
 
 const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart)
@@ -28,48 +29,53 @@ const ShippingScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      <CheckoutSteps step1 step2 />
       <h1>Envio</h1>
       <Form onSubmit={submitHandler}>
         <FormGroup controlId={"address"}>
           <FormLabel>Direccion</FormLabel>
-          <FormControl
+          <Form.Control
             type="text"
             placeholder="Ingrese direccion"
             value={address}
-            requred
+            requred="required"
             onChange={(e) => setAddress(e.target.value)}
           />
         </FormGroup>
+
         <FormGroup controlId={"city"}>
           <FormLabel>Ciudad</FormLabel>
           <FormControl
             type="text"
             placeholder="Ingrese ciudad"
             value={city}
-            requred
+            requred="required"
             onChange={(e) => setCity(e.target.value)}
           />
         </FormGroup>
+
         <FormGroup controlId={"postalCode"}>
           <FormLabel>Codigo Postal</FormLabel>
           <FormControl
             type="text"
             placeholder="Ingrese su codigo postal"
             value={postalCode}
-            requred
+            requred="required"
             onChange={(e) => setPostalCode(e.target.value)}
           />
         </FormGroup>
+
         <FormGroup controlId={"country"}>
           <FormLabel>Pais</FormLabel>
           <FormControl
             type="text"
             placeholder="Ingrese su pais"
             value={country}
-            requred
+            requred="required"
             onChange={(e) => setCountry(e.target.value)}
           />
         </FormGroup>
+
         <Button variant="primary" type="submit">
           Continuar
         </Button>
