@@ -13,6 +13,7 @@ import {
 import Message from "../components/Message"
 import { getOrderDetails } from "../actions/orderActions"
 import Loader from "../components/Loader"
+import OrderSummary from "../components/OrderSummary"
 
 const OrderScreen = ({ match }) => {
   const orderId = match.params.id
@@ -31,7 +32,7 @@ const OrderScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId))
-  }, [])
+  }, [dispatch, orderId])
 
   return loading ? (
     <Loader />
@@ -120,37 +121,7 @@ const OrderScreen = ({ match }) => {
         <Col md={4}>
           <Card>
             <ListGroup variant="flush">
-              <ListGroupItem>
-                <h2>Resumen de orden</h2>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
-                </Row>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Envio</Col>
-                  <Col>${order.shippingPrice}</Col>
-                </Row>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Impuestos</Col>
-                  <Col>${order.taxPrice}</Col>
-                </Row>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
-                </Row>
-              </ListGroupItem>
+              <OrderSummary summary={order} />
             </ListGroup>
           </Card>
         </Col>

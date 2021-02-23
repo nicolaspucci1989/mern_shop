@@ -15,11 +15,11 @@ import {
 import CheckoutSteps from "../components/CheckoutSteps"
 import Message from "../components/Message"
 import { createOrder } from "../actions/orderActions"
+import OrderSummary from "../components/OrderSummary"
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
-  const userLogin = useSelector((state) => state.userLogin)
 
   cart.itemsPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
@@ -116,37 +116,7 @@ const PlaceOrderScreen = ({ history }) => {
         <Col md={4}>
           <Card>
             <ListGroup variant="flush">
-              <ListGroupItem>
-                <h2>Resumen de orden</h2>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Items</Col>
-                  <Col>${cart.itemsPrice}</Col>
-                </Row>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Envio</Col>
-                  <Col>${cart.shippingPrice}</Col>
-                </Row>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Impuestos</Col>
-                  <Col>${cart.taxPrice}</Col>
-                </Row>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <Row>
-                  <Col>Total</Col>
-                  <Col>${cart.totalPrice}</Col>
-                </Row>
-              </ListGroupItem>
+              <OrderSummary summary={cart} />
 
               <ListGroupItem>
                 {error && <Message variant="error">{error}</Message>}
