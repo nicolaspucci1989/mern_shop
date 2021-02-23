@@ -6,6 +6,7 @@ import Order from "../models/orderModel.js"
 // @access Private
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
+    name,
     orderItems,
     shippingAddress,
     paymentMethod,
