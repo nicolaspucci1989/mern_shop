@@ -12,6 +12,7 @@ import {
   FormLabel,
   Row,
 } from "react-bootstrap"
+import { listUserOrders } from "../actions/orderActions"
 
 const ProfileScreen = ({ history }) => {
   const [name, setName] = useState("")
@@ -25,6 +26,9 @@ const ProfileScreen = ({ history }) => {
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
 
+  const orderUserList = useSelector((state) => state.orderUserList)
+  const { loading: loadingOrders, error: errorOrders, orders } = orderUserList
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -37,6 +41,7 @@ const ProfileScreen = ({ history }) => {
     } else {
       if (!user.name) {
         dispatch(getUserDetails("profile"))
+        dispatch(listUserOrders())
       } else {
         setName(user.name)
         setEmail(user.email)
