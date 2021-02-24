@@ -5,7 +5,7 @@ import {
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
-  ORDER_LIST_MY_FAIL,
+  ORDER_LIST_USER_FAIL,
   ORDER_USER_LIST_REQUEST,
   ORDER_USER_LIST_SUCCESS,
   ORDER_PAY_FAIL,
@@ -58,13 +58,13 @@ export const orderPayReducer = (state = {}, action) => {
   }
 }
 
-export const orderUserListReducer = (state = { order: [] }, action) => {
+export const orderUserListReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ORDER_USER_LIST_REQUEST:
       return { loading: true }
     case ORDER_USER_LIST_SUCCESS:
       return { loading: false, orders: action.payload }
-    case ORDER_LIST_MY_FAIL:
+    case ORDER_LIST_USER_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
