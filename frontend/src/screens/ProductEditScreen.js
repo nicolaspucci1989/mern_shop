@@ -5,6 +5,7 @@ import {
   Button,
   Form,
   FormControl,
+  FormFile,
   FormGroup,
   FormLabel,
 } from "react-bootstrap"
@@ -18,6 +19,7 @@ import {
   PRODUCT_UPDATE_RESET,
 } from "../constants/productConstants"
 import { listProductDetails, updateProduct } from "../actions/productActions"
+import axios from "axios"
 
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id
@@ -29,6 +31,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [countInStock, setCountInStock] = useState(0)
   const [brand, setBrand] = useState("")
   const [image, setImage] = useState("")
+  const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -76,6 +79,24 @@ const ProductEditScreen = ({ match, history }) => {
         image,
       })
     )
+  }
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append("image", file)
+    setUploading(true)
+
+    try {
+      const config = { headers: { "Content-Type": "multipart/form-data" } }
+
+      const { data } = await axios.post("/api/upload", formData, config)
+      setImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
   }
 
   return (
@@ -157,10 +178,17 @@ const ProductEditScreen = ({ match, history }) => {
               <FormLabel>Imagen</FormLabel>
               <FormControl
                 type="text"
-                label="Imagen"
+                placeholder="Ingrese url de la imagen"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               />
+              <FormFile
+                id="image-file"
+                label="elegir archivo"
+                custom
+                onChange={uploadFileHandler}
+              />
+              {uploading && <Loader />}
             </FormGroup>
 
             <Button type="submit" variant="primary">
